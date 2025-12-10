@@ -1,0 +1,35 @@
+customer-support-bot/
+├── .env                       # API keys and secrets (never commit this)
+├── docker-compose.yml         # For spinning up Vector DB/Redis locally
+├── pyproject.toml             # Dependencies (Poetry or Pip)
+├── README.md
+│
+├── data/                      # Local storage for raw docs
+│   ├── raw/                   # PDFs, Images, Text files
+│   └── processed/             # Cleaned chunks (optional cache)
+│
+├── src/
+│   ├── app.py                 # FastAPI entry point
+│   │
+│   ├── core/                  # Core configurations
+│   │   ├── config.py          # Pydantic settings management
+│   │   └── logger.py          # Structured logging setup
+│   │
+│   ├── ingestion/             # The "Indexing Process"
+│   │   ├── loader.py          # PDF/Image parsers
+│   │   ├── chunker.py         # Text splitting logic
+│   │   └── pipeline.py        # Orchestrates loading -> embedding -> DB
+│   │
+│   ├── retrieval/             # The "Search" logic
+│   │   ├── vector_store.py    # ChromaDB/Qdrant wrapper
+│   │   └── reranker.py        # (Optional) Re-ranking for better precision
+│   │
+│   ├── engine/                # The "Generation" logic
+│   │   ├── prompts.py         # Centralized Prompt Templates
+│   │   ├── guardrails.py      # Input/Output safety checks
+│   │   └── chat_engine.py     # Main RAG logic (Context + LLM)
+│   │
+│   └── evaluation/            # For testing quality
+│       └── eval_metrics.py    # Ragas or TruLens implementation
+│
+└── tests/                     # Unit and Integration tests
