@@ -1,0 +1,28 @@
+customer-support-bot/
+├── data/
+│   ├── raw_pdfs/              # For text
+│   ├── raw_images/            # For Image Encoder (Multimodal)
+│   └── training_data/         # For RAFT/Fine-tuning datasets
+│
+├── src/
+│   ├── ingestion/             # (Phase A: Indexing)
+│   │   ├── multimodal.py      # [NEW] Handles Image Encoders (CLIP/GPT-4o)
+│   │   ├── chunking.py        # Advanced chunking (RecursiveCharacter)
+│   │   └── vector_db.py       # Pushes vectors to Chroma/Pinecone
+│   │
+│   ├── retrieval/             # (Phase B: Retrieval)
+│   │   ├── search.py          # Nearest Neighbor Search
+│   │   ├── expansion.py       # [NEW] Query Expansion (HyDE/Synonyms)
+│   │   └── reranker.py        # Re-ranks results for better precision
+│   │
+│   ├── generation/            # (Phase B: Generation)
+│   │   ├── chat.py            # Main LLM interaction
+│   │   ├── prompts.py         # Few-shot & Chain-of-Thought templates
+│   │   └── guardrails.py      # [NEW] Input/Output Safety Checks
+│   │
+│   ├── optimization/          # [NEW] (Fine-tuning & RAFT)
+│   │   ├── dataset_gen.py     # Generates RAFT datasets (Q+A+Docs)
+│   │   └── trainer.py         # Runs PEFT/LoRA fine-tuning
+│   │
+│   └── api/
+│       └── app.py             # FastAPI serving the bot

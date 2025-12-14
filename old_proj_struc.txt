@@ -1,4 +1,4 @@
-customer-support-bot/
+customer-support-bot/ 
 ├── .env                       # API keys and secrets (never commit this)
 ├── docker-compose.yml         # For spinning up Vector DB/Redis locally
 ├── pyproject.toml             # Dependencies (Poetry or Pip)
