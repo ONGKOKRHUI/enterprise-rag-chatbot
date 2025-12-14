@@ -15,7 +15,7 @@ def run_ingestion():
         return
 
     # 2. Load Documents (Parsing)
-    # SimpleDirectoryReader handles PDFs, txt, images automatically
+    # SimpleDirectoryReader handles PDFs, txt, images automatically 
     documents = SimpleDirectoryReader(settings.DATA_DIR).load_data()
     print(f"📄 Loaded {len(documents)} document pages.")
 

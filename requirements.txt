@@ -6,3 +6,13 @@ chromadb
 python-dotenv
 pydantic
 pydantic-settings
+
+datasets 
+transformers 
+peft 
+trl 
+torch
+
+bitsandbytes
+accelerate
+llama-index-llms-huggingface

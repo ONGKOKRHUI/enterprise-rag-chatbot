@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings
 from llama_index.core import Settings
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from src.core.llm_factory import get_llm # Import our new factory
 
 class AppSettings(BaseSettings):
     # Paths
@@ -14,6 +15,9 @@ class AppSettings(BaseSettings):
     LLM_MODEL: str = "llama3"  # Ensure you ran `ollama pull llama3`
     EMBED_MODEL: str = "BAAI/bge-small-en-v1.5" # Excellent local embedding model
     
+    # TOGGLE THIS TO TRUE TO USE YOUR TRAINED MODEL
+    USE_FINETUNED: bool = True
+
     # RAG Parameters
     CHUNK_SIZE: int = 512
     CHUNK_OVERLAP: int = 50
@@ -25,10 +29,13 @@ def init_settings():
     # 1. Setup LLM (Local Llama3)
     Settings.llm = Ollama(model=settings.LLM_MODEL, request_timeout=300.0)
     
+    # 1. Get the correct LLM from our Factory
+    Settings.llm = get_llm(use_finetuned=settings.USE_FINETUNED)
+
     # 2. Setup Embedding Model (Local HuggingFace)
     # This runs locally on CPU/GPU, no API key needed.
     Settings.embed_model = HuggingFaceEmbedding(model_name=settings.EMBED_MODEL)
     
     # 3. Text Splitter Settings
     Settings.chunk_size = settings.CHUNK_SIZE
-    Settings.chunk_overlap = settings.CHUNK_OVERLAP
+    Settings.chunk_overlap = settings.CHUNK_OVERLAP 

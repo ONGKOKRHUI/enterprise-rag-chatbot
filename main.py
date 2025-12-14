@@ -1,8 +1,8 @@
 # main.py
 import sys
 from src.ingestion.pipeline import run_ingestion
-from src.engine.chat import get_chat_engine
-
+from src.engine.chat import get_chat_engine, get_chat_engine_advanced
+ 
 def main():
     print("--- Customer Support RAG Bot (Phase 1) ---")
     print("1. Ingest Data (Process PDFs)")
